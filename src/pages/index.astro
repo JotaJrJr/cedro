@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PhoneMockup from '../components/PhoneMockup.astro';
+import HojePreview from '../components/HojePreview.astro';
 
 const recursos = [
   {
@@ -65,19 +67,29 @@ const duvidas = [
     </nav>
   </header>
 
-  <main>
+  <div class="hero-wrap">
     <section class="hero">
-      <h1>Sua paz, cinco minutos por dia</h1>
-      <p class="sub">
-        Um companheiro devocional calmo, em português. Versículo do dia,
-        devocional curto, Bíblia offline e meditações guiadas — sem barulho,
-        sem tom de marketing.
-      </p>
-      <div class="cta">
-        <span class="badge">Em breve na App Store e no Google Play</span>
+      <div class="hero-texto">
+        <h1>Sua paz, cinco minutos por dia</h1>
+        <p class="sub">
+          Um companheiro devocional calmo, em português. Versículo do dia,
+          devocional curto, Bíblia offline e meditações guiadas — sem
+          barulho, sem tom de marketing.
+        </p>
+        <div class="cta">
+          <span class="badge">Em breve na App Store e no Google Play</span>
+        </div>
+      </div>
+      <div class="hero-mockup">
+        <PhoneMockup>
+          <HojePreview />
+        </PhoneMockup>
+        <p class="legenda-mockup">Prévia do design — capturas de tela reais em breve</p>
       </div>
     </section>
+  </div>
 
+  <main>
     <section id="recursos" class="recursos">
       <h2>Um lugar para cada parte da caminhada</h2>
       <div class="grade">
@@ -160,9 +172,24 @@ const duvidas = [
     padding: 0 22px 96px;
   }
 
+  .hero-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
   .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 56px;
+    padding: 24px 0 72px;
+    flex-wrap: wrap;
+  }
+
+  .hero-texto {
+    max-width: 480px;
     text-align: center;
-    padding: 48px 0 64px;
   }
 
   .hero h1 {
@@ -173,8 +200,32 @@ const duvidas = [
   .hero .sub {
     font-size: 18px;
     color: var(--ink-soft);
-    max-width: 520px;
-    margin: 0 auto 32px;
+    margin: 0 0 32px;
+  }
+
+  .hero-mockup {
+    text-align: center;
+  }
+
+  .legenda-mockup {
+    margin: 16px 0 0;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  @media (min-width: 860px) {
+    .hero {
+      text-align: left;
+      justify-content: space-between;
+    }
+
+    .hero-texto {
+      text-align: left;
+    }
+
+    .hero .sub {
+      margin: 0 0 32px;
+    }
   }
 
   .badge {

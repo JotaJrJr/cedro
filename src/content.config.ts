@@ -7,13 +7,14 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     // Pilar de conteúdo (ver docs/produto/conteudo-seo.md no repo projeto-biblico):
-    // devocional | ansiedade-paz | oracao | biblia-iniciantes | comparacao
+    // devocional | ansiedade-paz | oracao | biblia-iniciantes | comparacao | estatisticas
     pillar: z.enum([
       'devocional',
       'ansiedade-paz',
       'oracao',
       'biblia-iniciantes',
       'comparacao',
+      'estatisticas',
     ]),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
