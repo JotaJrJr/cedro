@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const recursos = [
+  {
+    titulo: 'Devocional diário',
+    texto: 'Uma reflexão curta, uma oração, um passo prático — cinco minutos por dia, sem tom de marketing.',
+  },
+  {
+    titulo: 'Bíblia completa offline',
+    texto: 'Leia sem internet, marque capítulos lidos e veja seu progresso acender um vitral, livro por livro.',
+  },
+  {
+    titulo: 'Meditações guiadas em áudio',
+    texto: 'Trilhas para ansiedade, paz, gratidão e medo — voz calma, som de ambiente, para ouvir com os olhos fechados.',
+  },
+  {
+    titulo: 'Diário e lista de oração',
+    texto: 'Tudo guardado só no seu aparelho. Um espaço seu para registrar como Deus tem falado.',
+  },
+  {
+    titulo: 'Jornadas temáticas',
+    texto: '14 dias de conteúdo guiado sobre um tema — cada uma planta uma espécie diferente no seu jardim.',
+  },
+  {
+    titulo: 'Plano de leitura guiado',
+    texto: '"Os Evangelhos em 30 dias" e outros planos, com um foco e uma nota curta para cada capítulo.',
+  },
+];
+
+const duvidas = [
+  {
+    pergunta: 'O Cedro é gratuito?',
+    resposta:
+      'Sim. O uso diário é grátis, com um banner discreto. Quem quiser pode assinar o Premium para remover os anúncios e apoiar o projeto.',
+  },
+  {
+    pergunta: 'Preciso de internet para usar?',
+    resposta:
+      'Não para o essencial — a Bíblia completa funciona offline. Meditações em áudio precisam baixar uma vez.',
+  },
+  {
+    pergunta: 'O conteúdo é revisado por alguém?',
+    resposta:
+      'Sim. Todo devocional, meditação e plano de leitura passa por revisão teológica antes de entrar no app.',
+  },
+  {
+    pergunta: 'Meus dados (diário, orações) ficam salvos onde?',
+    resposta:
+      'Só no seu aparelho. Diário, lista de oração, grifos e progresso de leitura nunca saem do seu celular.',
+  },
+];
+---
+
+<Layout
+  title="Cedro"
+  description="Devocional diário, Bíblia offline, meditações guiadas e jornadas temáticas para ansiedade, paz e gratidão — em português."
+>
+  <header class="topo">
+    <a href="/" class="marca">Cedro</a>
+    <nav>
+      <a href="#recursos">Recursos</a>
+      <a href="/blog">Blog</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Sua paz, cinco minutos por dia</h1>
+      <p class="sub">
+        Um companheiro devocional calmo, em português. Versículo do dia,
+        devocional curto, Bíblia offline e meditações guiadas — sem barulho,
+        sem tom de marketing.
+      </p>
+      <div class="cta">
+        <span class="badge">Em breve na App Store e no Google Play</span>
+      </div>
+    </section>
+
+    <section id="recursos" class="recursos">
+      <h2>Um lugar para cada parte da caminhada</h2>
+      <div class="grade">
+        {recursos.map((r) => (
+          <article class="cartao">
+            <h3>{r.titulo}</h3>
+            <p>{r.texto}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="revisao">
+      <h2>Conteúdo revisado, não gerado às pressas</h2>
+      <p>
+        Cada devocional, meditação e plano de leitura do Cedro passa por
+        revisão teológica antes de chegar até você. Nada é publicado sem
+        alguém conferir se está alinhado à Escritura.
+      </p>
+    </section>
+
+    <section id="duvidas" class="duvidas">
+      <h2>Dúvidas</h2>
+      <dl>
+        {duvidas.map((d) => (
+          <div class="item">
+            <dt>{d.pergunta}</dt>
+            <dd>{d.resposta}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <a href="/termos">Termos de uso</a>
+      &nbsp;·&nbsp;
+      <a href="/privacidade">Política de privacidade</a>
+      &nbsp;·&nbsp;
+      <a href="/blog">Blog</a>
+    </p>
+    <p class="contato">
+      Contato: <a href="mailto:jotapereirajunior@gmail.com">jotapereirajunior@gmail.com</a>
+    </p>
+  </footer>
+</Layout>
+
+<style>
+  .topo {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .marca {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .topo nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  .topo nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 22px 96px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 48px 0 64px;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    margin: 0 0 20px;
+  }
+
+  .hero .sub {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  section {
+    padding: 48px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  section h2 {
+    font-size: 24px;
+    text-align: center;
+    margin: 0 0 32px;
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .cartao {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .cartao h3 {
+    font-size: 17px;
+    margin: 0 0 8px;
+  }
+
+  .cartao p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .revisao {
+    text-align: center;
+  }
+
+  .revisao p {
+    max-width: 480px;
+    margin: 0 auto;
+    color: var(--ink-soft);
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  .item {
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .item:first-child {
+    border-top: none;
+  }
+
+  dt {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  footer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 22px 64px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  footer a {
+    color: var(--ink-soft);
+  }
+
+  .contato {
+    margin-top: 12px;
+  }
+</style>

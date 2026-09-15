@@ -1,0 +1,107 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <header class="topo">
+    <a href="/" class="marca">Cedro</a>
+    <nav>
+      <a href="/#recursos">Recursos</a>
+      <a href="/blog">Blog</a>
+      <a href="/#duvidas">Dúvidas</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h1>{post.data.title}</h1>
+      <p class="data">
+        {post.data.publishedAt.toLocaleDateString('pt-BR', { dateStyle: 'long', timeZone: 'UTC' })}
+      </p>
+      <div class="corpo">
+        <Content />
+      </div>
+    </article>
+    <p class="voltar"><a href="/blog">← Voltar ao blog</a></p>
+  </main>
+</Layout>
+
+<style>
+  .topo {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .marca {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .topo nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  .topo nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 24px 22px 96px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+
+  .data {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin: 0 0 32px;
+  }
+
+  .corpo :global(h2) {
+    font-size: 22px;
+    margin: 32px 0 12px;
+  }
+
+  .corpo :global(p) {
+    margin: 14px 0;
+  }
+
+  .corpo :global(ul) {
+    padding-left: 22px;
+  }
+
+  .voltar {
+    margin-top: 48px;
+  }
+
+  .voltar a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+</style>

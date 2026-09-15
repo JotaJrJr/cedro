@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+---
+
+<Layout
+  title="Blog"
+  description="Devocional, ansiedade, oração e leitura bíblica — artigos do Cedro para quem busca cinco minutos de paz por dia."
+>
+  <header class="topo">
+    <a href="/" class="marca">Cedro</a>
+    <nav>
+      <a href="/#recursos">Recursos</a>
+      <a href="/blog">Blog</a>
+      <a href="/#duvidas">Dúvidas</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Blog</h1>
+    <ul class="lista">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+    {posts.length === 0 && <p class="vazio">Os primeiros artigos estão a caminho.</p>}
+  </main>
+</Layout>
+
+<style>
+  .topo {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .marca {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .topo nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  .topo nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 24px 22px 96px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .lista {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+  }
+
+  .lista li {
+    border-top: 1px solid var(--line);
+    padding: 24px 0;
+  }
+
+  .lista a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .lista h2 {
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  .lista p {
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .vazio {
+    color: var(--ink-soft);
+  }
+</style>

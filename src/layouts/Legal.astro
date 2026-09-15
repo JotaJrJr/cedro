@@ -1,0 +1,92 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <header class="marca"><a href="/">Cedro</a></header>
+  <main>
+    <slot />
+  </main>
+</Layout>
+
+<style>
+  header.marca {
+    text-align: center;
+    padding: 40px 22px 8px;
+  }
+
+  header.marca a {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 24px 22px 80px;
+  }
+
+  main :global(h1) {
+    font-size: 28px;
+    margin: 8px 0 4px;
+  }
+
+  main :global(h2) {
+    font-size: 20px;
+    margin: 34px 0 10px;
+  }
+
+  main :global(h3) {
+    font-size: 17px;
+    margin: 22px 0 6px;
+  }
+
+  main :global(.data) {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  main :global(p),
+  main :global(li) {
+    margin: 12px 0;
+  }
+
+  main :global(ul) {
+    padding-left: 22px;
+  }
+
+  main :global(hr) {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 40px 0;
+  }
+
+  main :global(.rodape) {
+    margin-top: 48px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  main :global(.rodape a) {
+    margin: 0 8px;
+  }
+
+  main :global(.aviso) {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+</style>
