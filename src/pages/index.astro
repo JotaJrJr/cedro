@@ -66,8 +66,9 @@ const duvidas = [
     </nav>
   </header>
 
-  <div class="hero-wrap">
-    <section class="hero">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-wrap">
       <div class="hero-texto">
         <h1>Sua paz, cinco minutos por dia</h1>
         <p class="sub">
@@ -84,11 +85,11 @@ const duvidas = [
           <img src="/screenshots/hoje.png" alt="Tela Hoje do app Cedro" class="screenshot" />
         </PhoneMockup>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <main>
-    <section id="recursos" class="recursos">
+  <section id="recursos" class="recursos reveal">
+    <div class="wrap-1080">
       <h2>Um lugar para cada parte da caminhada</h2>
       <div class="grade">
         {recursos.map((r) => (
@@ -98,18 +99,76 @@ const duvidas = [
           </article>
         ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="revisao">
-      <h2>Conteúdo revisado, não gerado às pressas</h2>
+  <section class="mostra reveal">
+    <div class="wrap-1080">
+      <h2>Por dentro do Cedro</h2>
+      <div class="mostra-telas">
+        <figure>
+          <PhoneMockup>
+            <img src="/screenshots/diario.png" alt="Tela de diário e oração do app Cedro" class="screenshot" />
+          </PhoneMockup>
+          <figcaption>Diário e lista de oração</figcaption>
+        </figure>
+        <figure>
+          <PhoneMockup>
+            <img src="/screenshots/biblia.png" alt="Tela de leitura da Bíblia no app Cedro" class="screenshot" />
+          </PhoneMockup>
+          <figcaption>Bíblia completa, offline</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="jardim reveal">
+    <div class="wrap-1080">
+      <h2>Seu jardim cresce com você</h2>
+      <p class="jardim-sub">
+        Cada jornada temática planta uma espécie diferente — acompanhe seu
+        crescimento, dia a dia, conforme avança na leitura.
+      </p>
+      <div class="jardim-fileira-wrap">
+        <div class="jardim-fileira">
+          {[1, 2, 3, 4, 5, 6].map((n) => (
+            <figure class="planta-card">
+              <img
+                src={`/img/plantas/cedro-${n}.webp`}
+                alt={`Cedro — estágio ${n} de 6`}
+                class="planta"
+              />
+              <figcaption>{n}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="verso reveal">
+    <div class="verso-bg"></div>
+    <div class="wrap-640 verso-conteudo">
+      <p class="verso-texto">
+        &ldquo;Ele me faz repousar em pastos verdejantes. Guia-me mansamente
+        a águas tranquilas.&rdquo;
+      </p>
+      <p class="verso-ref">Salmos 23:2 · ARC</p>
+    </div>
+  </section>
+
+  <section class="revisao reveal">
+    <div class="wrap-720">
       <p>
         Cada devocional, meditação e plano de leitura do Cedro passa por
         revisão teológica antes de chegar até você. Nada é publicado sem
         alguém conferir se está alinhado à Escritura.
       </p>
-    </section>
+    </div>
+  </section>
 
-    <section id="duvidas" class="duvidas">
+  <section id="duvidas" class="duvidas reveal">
+    <div class="wrap-720">
       <h2>Dúvidas</h2>
       <dl>
         {duvidas.map((d) => (
@@ -119,8 +178,18 @@ const duvidas = [
           </div>
         ))}
       </dl>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <section class="fechamento reveal">
+    <div class="wrap-640">
+      <p class="fechamento-texto">
+        Sua caminhada com Deus não precisa ser apressada. O Cedro chega em
+        breve — cinco minutos por dia, no seu tempo.
+      </p>
+      <span class="badge">Em breve na App Store e no Google Play</span>
+    </div>
+  </section>
 
   <footer>
     <p>
@@ -164,30 +233,99 @@ const duvidas = [
     font-size: 15px;
   }
 
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 22px 96px;
-  }
-
-  .hero-wrap {
-    max-width: 1080px;
+  .wrap-720,
+  .wrap-1080,
+  .wrap-640 {
     margin: 0 auto;
     padding: 0 22px;
   }
 
+  .wrap-720 {
+    max-width: 720px;
+  }
+
+  .wrap-1080 {
+    max-width: 1080px;
+  }
+
+  .wrap-640 {
+    max-width: 640px;
+  }
+
   .hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/img/hero-fundo.webp');
+    background-size: cover;
+    background-position: center 65%;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(244, 245, 241, 0.35) 0%, var(--ground) 96%),
+      linear-gradient(to top, rgba(244, 245, 241, 0.25) 0%, rgba(244, 245, 241, 0) 40%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero-bg {
+      filter: brightness(0.42) saturate(0.85);
+    }
+
+    .hero-bg::after {
+      background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, var(--ground) 96%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 40%);
+    }
+  }
+
+  .hero-wrap {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 56px;
-    padding: 24px 0 72px;
+    padding-top: 24px;
+    padding-bottom: 96px;
     flex-wrap: wrap;
   }
 
   .hero-texto {
     max-width: 480px;
     text-align: center;
+    animation: hero-subir 0.7s ease-out both;
+  }
+
+  .hero-mockup {
+    animation: hero-subir 0.7s ease-out 0.15s both;
+  }
+
+  @keyframes hero-subir {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-texto,
+    .hero-mockup {
+      animation: none;
+    }
   }
 
   .hero h1 {
@@ -216,17 +354,13 @@ const duvidas = [
   }
 
   @media (min-width: 860px) {
-    .hero {
+    .hero-wrap {
       text-align: left;
       justify-content: space-between;
     }
 
     .hero-texto {
       text-align: left;
-    }
-
-    .hero .sub {
-      margin: 0 0 32px;
     }
   }
 
@@ -253,7 +387,7 @@ const duvidas = [
 
   .grade {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
   }
 
@@ -275,6 +409,156 @@ const duvidas = [
     margin: 0;
   }
 
+  .mostra {
+    text-align: center;
+  }
+
+  .mostra-telas {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .mostra-telas figure {
+    margin: 0;
+    --phone-w: 220px;
+    --phone-h: 449px;
+    --phone-w-sm: 170px;
+    --phone-h-sm: 347px;
+  }
+
+  .mostra-telas figcaption {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .jardim {
+    text-align: center;
+  }
+
+  .jardim-sub {
+    max-width: 480px;
+    margin: 0 auto 40px;
+    color: var(--ink-soft);
+  }
+
+  .jardim-fileira-wrap {
+    position: relative;
+  }
+
+  .jardim-fileira {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 4px 4px 14px;
+  }
+
+  @media (min-width: 860px) {
+    .jardim-fileira {
+      justify-content: center;
+    }
+  }
+
+  .planta-card {
+    margin: 0;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    background: #f6f1e7;
+    border-radius: 12px;
+    padding: 10px 10px 6px;
+    box-shadow: 0 6px 16px -8px rgba(29, 43, 36, 0.3);
+  }
+
+  .planta-card .planta {
+    display: block;
+    width: 130px;
+    border-radius: 4px;
+  }
+
+  .planta-card figcaption {
+    margin-top: 4px;
+    text-align: center;
+    font-size: 12px;
+    color: #4a4436;
+  }
+
+  .jardim-fileira-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 14px;
+    width: 56px;
+    background: linear-gradient(to right, transparent, var(--ground) 88%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .planta-card .planta {
+      width: 90px;
+    }
+  }
+
+  .verso {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    border-top: none;
+    padding: 96px 0;
+  }
+
+  .verso-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/img/verso-fundo.webp');
+    background-size: cover;
+    background-position: center 55%;
+  }
+
+  .verso-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, var(--ground) 0%, rgba(244, 245, 241, 0.55) 20%, rgba(244, 245, 241, 0.55) 80%, var(--ground) 100%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .verso-bg {
+      filter: brightness(0.4) saturate(0.85);
+    }
+
+    .verso-bg::after {
+      background:
+        linear-gradient(to bottom, var(--ground) 0%, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.15) 80%, var(--ground) 100%);
+    }
+  }
+
+  .verso-conteudo {
+    position: relative;
+  }
+
+  .verso-texto {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(22px, 3.2vw, 30px);
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+
+  .verso-ref {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
   .revisao {
     text-align: center;
   }
@@ -283,6 +567,7 @@ const duvidas = [
     max-width: 480px;
     margin: 0 auto;
     color: var(--ink-soft);
+    font-size: 14px;
   }
 
   dl {
@@ -306,6 +591,20 @@ const duvidas = [
   dd {
     margin: 0;
     color: var(--ink-soft);
+  }
+
+  .fechamento {
+    text-align: center;
+    border-top: none;
+    padding: 8px 0 56px;
+  }
+
+  .fechamento-texto {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 0 0 20px;
   }
 
   footer {

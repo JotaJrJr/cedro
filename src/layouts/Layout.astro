@@ -72,6 +72,28 @@ const siteTitle = title === 'Cedro' ? title : `${title} · Cedro`;
   <body>
     <slot />
   </body>
+
+  <script>
+    const alvos = document.querySelectorAll('.reveal');
+    const reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduzMovimento || !('IntersectionObserver' in window)) {
+      alvos.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const observador = new IntersectionObserver(
+        (entradas) => {
+          for (const entrada of entradas) {
+            if (entrada.isIntersecting) {
+              entrada.target.classList.add('is-visible');
+              observador.unobserve(entrada.target);
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+      alvos.forEach((el) => observador.observe(el));
+    }
+  </script>
 </html>
 
 <style is:global>
@@ -133,5 +155,16 @@ const siteTitle = title === 'Cedro' ? title : `${title} · Cedro`;
   img,
   svg {
     max-width: 100%;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>

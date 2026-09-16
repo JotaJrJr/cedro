@@ -16,8 +16,8 @@
 <style>
   .moldura {
     position: relative;
-    width: 300px;
-    height: 612px;
+    width: var(--phone-w, 300px);
+    height: var(--phone-h, 612px);
     background: #0b0f0d;
     border-radius: 52px;
     padding: 14px;
@@ -66,8 +66,8 @@
 
   @media (max-width: 480px) {
     .moldura {
-      width: 240px;
-      height: 490px;
+      width: var(--phone-w-sm, 240px);
+      height: var(--phone-h-sm, 490px);
       border-radius: 42px;
     }
 

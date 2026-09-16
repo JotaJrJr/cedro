@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# notas internas de design review (impeccable) — não é conteúdo do site
+.impeccable/
