@@ -1,8 +1,7 @@
 ---
-// Moldura de iPhone em CSS puro — sem imagem externa. O conteúdo (slot)
-// é uma prévia estilizada da UI real do app (mesmos tokens de cor/tipografia
-// do AppTheme), não uma captura de tela. Trocar pelo screenshot real assim
-// que existir (ver docs/produto/lancamento-lojas.md § "Continuar no Mac").
+// Moldura de iPhone em CSS puro — sem imagem externa. O "notch" cobre a
+// mesma área que já vem mascarada (preta) nas capturas de tela reais do
+// app, usadas via <slot />.
 ---
 
 <div class="moldura">
@@ -40,13 +39,13 @@
 
   .notch {
     position: absolute;
-    top: 14px;
+    top: 2.3%;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 28px;
+    width: 38%;
+    height: 4.6%;
     background: #0b0f0d;
-    border-radius: 16px;
+    border-radius: 999px;
     z-index: 2;
   }
 
