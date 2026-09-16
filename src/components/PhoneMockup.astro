@@ -1,11 +1,10 @@
 ---
-// Moldura de iPhone em CSS puro — sem imagem externa. O "notch" cobre a
-// mesma área que já vem mascarada (preta) nas capturas de tela reais do
-// app, usadas via <slot />.
+// Moldura de iPhone em CSS puro — sem imagem externa. As capturas de tela
+// usadas via <slot /> já vêm com a barra de status cortada, então a
+// moldura não precisa desenhar notch/ilha por cima.
 ---
 
 <div class="moldura">
-  <div class="notch"></div>
   <div class="tela">
     <slot />
   </div>
@@ -35,18 +34,6 @@
     background: var(--ground);
     border-radius: 38px;
     overflow: hidden;
-  }
-
-  .notch {
-    position: absolute;
-    top: 2.3%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 38%;
-    height: 4.6%;
-    background: #0b0f0d;
-    border-radius: 999px;
-    z-index: 2;
   }
 
   .botao-lateral {
