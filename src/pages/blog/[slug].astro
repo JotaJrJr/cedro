@@ -14,7 +14,11 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  article={{ publishedAt: post.data.publishedAt }}
+>
   <header class="topo">
     <a href="/" class="marca">Cedro</a>
     <nav>

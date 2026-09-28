@@ -6,6 +6,11 @@ interface Props {
   image?: string;
   /** noindex em páginas que não devem ser rastreadas (ex.: rascunhos). */
   noindex?: boolean;
+  /** Presente só em posts de blog — troca o JSON-LD de MobileApplication por Article. */
+  article?: {
+    publishedAt: Date;
+    modifiedAt?: Date;
+  };
 }
 
 const {
@@ -13,6 +18,7 @@ const {
   description,
   image = '/og-cedro.jpg',
   noindex = false,
+  article,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -57,17 +63,41 @@ const siteTitle = title === 'Cedro' ? title : `${title} · Cedro`;
     />
 
     <!-- JSON-LD — ajuda buscadores e assistentes de IA a entender o que é o
-         site sem precisar inferir do layout. -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'MobileApplication',
-      name: 'Cedro',
-      applicationCategory: 'LifestyleApplication',
-      operatingSystem: 'iOS, Android',
-      description: 'Devocional diário, Bíblia offline, meditações guiadas e jornadas temáticas para ansiedade, paz e gratidão — em português.',
-      url: 'https://cedroapp.com.br',
-      inLanguage: 'pt-BR',
-    })} />
+         site sem precisar inferir do layout. Home/páginas soltas se anunciam
+         como o app (MobileApplication); posts de blog se anunciam como
+         Article, com data e editora — é o que o Google usa pra mostrar data
+         de publicação no resultado de busca. -->
+    {article ? (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: title,
+        description,
+        image: ogImageURL,
+        url: canonicalURL,
+        inLanguage: 'pt-BR',
+        datePublished: article.publishedAt.toISOString(),
+        dateModified: (article.modifiedAt ?? article.publishedAt).toISOString(),
+        author: { '@type': 'Organization', name: 'Cedro', url: 'https://cedroapp.com.br' },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Cedro',
+          logo: { '@type': 'ImageObject', url: new URL('/og-cedro.jpg', Astro.site) },
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+      })} />
+    ) : (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'MobileApplication',
+        name: 'Cedro',
+        applicationCategory: 'LifestyleApplication',
+        operatingSystem: 'iOS, Android',
+        description: 'Devocional diário, Bíblia offline, meditações guiadas e jornadas temáticas para ansiedade, paz e gratidão — em português.',
+        url: 'https://cedroapp.com.br',
+        inLanguage: 'pt-BR',
+      })} />
+    )}
   </head>
   <body>
     <slot />
