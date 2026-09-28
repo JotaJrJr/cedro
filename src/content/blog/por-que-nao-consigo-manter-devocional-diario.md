@@ -1,5 +1,5 @@
 ---
-title: "Por que não consigo manter um devocional diário (e o que fazer)"
+title: "Por que não consigo manter um devocional diário"
 description: "Não é falta de fé nem preguiça — é o formato errado. Veja por que a constância falha e o que muda quando o hábito é pequeno de verdade."
 pillar: "devocional"
 publishedAt: 2026-09-15

@@ -1,5 +1,5 @@
 ---
-title: "30 versículos para ansiedade (com contexto, não só a lista)"
+title: "30 versículos para ansiedade, com contexto"
 description: "Versículos bíblicos sobre ansiedade, medo e paz, organizados por tema — cada um com uma frase de contexto para você entender por que ele importa."
 pillar: "ansiedade-paz"
 publishedAt: 2026-09-16

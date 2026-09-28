@@ -23,7 +23,10 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
-const siteTitle = title === 'Cedro' ? title : `${title} · Cedro`;
+// Posts de blog (prop `article`) não levam o sufixo " · Cedro": o H1 e a URL
+// já deixam claro que é do Cedro, e cada caractere importa pro título não
+// cortar no resultado de busca (limite prático de ~60 chars).
+const siteTitle = article || title === 'Cedro' ? title : `${title} · Cedro`;
 ---
 
 <!doctype html>
