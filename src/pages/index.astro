@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import PhoneMockup from '../components/PhoneMockup.astro';
 
 const APP_STORE_URL = 'https://apps.apple.com/br/app/cedro-devocional/id6810472888';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.jotajrjr.cedro';
 
 const recursos = [
   {
@@ -80,7 +81,7 @@ const duvidas = [
         </p>
         <div class="cta">
           <a class="btn-loja" href={APP_STORE_URL}>Baixar na App Store</a>
-          <span class="badge">Google Play em breve</span>
+          <a class="btn-loja" href={PLAY_STORE_URL}>Baixar no Google Play</a>
         </div>
       </div>
       <div class="hero-mockup">
@@ -192,7 +193,7 @@ const duvidas = [
       </p>
       <div class="cta cta-centro">
         <a class="btn-loja" href={APP_STORE_URL}>Baixar na App Store</a>
-        <span class="badge">Google Play em breve</span>
+        <a class="btn-loja" href={PLAY_STORE_URL}>Baixar no Google Play</a>
       </div>
     </div>
   </section>
